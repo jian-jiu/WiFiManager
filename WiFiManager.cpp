@@ -12,6 +12,8 @@
 
 #include "WiFiManager.h"
 
+#include "simple.h"
+
 #if defined(ESP8266) || defined(ESP32)
 
 #ifdef ESP32
@@ -832,7 +834,7 @@ boolean WiFiManager::process(){
     #endif
 	
     if(webPortalActive || (configPortalActive && !_configPortalIsBlocking)){
-      // if timed out or abort, break
+      // 如果超时或中止，请中断
       if(_allowExit && (configPortalHasTimeout() || abort)){
         #ifdef WM_DEBUG_LEVEL
         DEBUG_WM(WM_DEBUG_DEV,F("process loop abort"));
@@ -870,7 +872,7 @@ uint8_t WiFiManager::processConfigPortal(){
     //HTTP handler
     server->handleClient();
 
-    // Waiting for save...
+    // 等待保存...
     if(connect) {
       connect = false;
       #ifdef WM_DEBUG_LEVEL
@@ -885,7 +887,7 @@ uint8_t WiFiManager::processConfigPortal(){
         #endif
       }
       else{
-        // attempt sta connection to submitted _ssid, _pass
+        // 尝试与提交的ssid、_pass建立sta连接
         uint8_t res = connectWifi(_ssid, _pass, _connectonsave) == WL_CONNECTED;
         if (res || (!_connectonsave)) {
           #ifdef WM_DEBUG_LEVEL
@@ -2137,7 +2139,7 @@ String WiFiManager::getInfoData(String id){
   #endif
   else if(id==F("idesize")){
     p = FPSTR(HTTP_INFO_idesize);
-    p.replace(FPSTR(T_1),(String)ESP.getFlashChipSize());
+    p.replace(FPSTR(T_1),size(ESP.getFlashChipSize()));
   }
   else if(id==F("flashsize")){
     #ifdef ESP8266
@@ -2166,12 +2168,12 @@ String WiFiManager::getInfoData(String id){
   }
   else if(id==F("freeheap")){
     p = FPSTR(HTTP_INFO_freeheap);
-    p.replace(FPSTR(T_1),(String)ESP.getFreeHeap());
+    p.replace(FPSTR(T_1),size(ESP.getFreeHeap()));
   }
   else if(id==F("memsketch")){
     p = FPSTR(HTTP_INFO_memsketch);
-    p.replace(FPSTR(T_1),(String)(ESP.getSketchSize()));
-    p.replace(FPSTR(T_2),(String)(ESP.getSketchSize()+ESP.getFreeSketchSpace()));
+    p.replace(FPSTR(T_1),size(ESP.getSketchSize()));
+    p.replace(FPSTR(T_2),size(ESP.getSketchSize() + ESP.getFreeSketchSpace()));
   }
   else if(id==F("memsmeter")){
     p = FPSTR(HTTP_INFO_memsmeter);

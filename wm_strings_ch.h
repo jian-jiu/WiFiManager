@@ -195,11 +195,11 @@ const char HTTP_JS[] PROGMEM =
 
 const char HTTP_INFO_memsmeter[]  PROGMEM = "<br/><progress value='{1}' max='{2}'></progress></dd>";
 const char HTTP_INFO_memsketch[]  PROGMEM = "<dt>内存-程序大小</dt><dd>已用/总共字节数<br/>{1} / {2}";
-const char HTTP_INFO_freeheap[]   PROGMEM = "<dt>内存-空闲堆</dt><dd>可用 {1} bytes</dd>";
+const char HTTP_INFO_freeheap[]   PROGMEM = "<dt>内存-空闲堆</dt><dd>可用 {1}</dd>";
 const char HTTP_INFO_wifihead[]   PROGMEM = "<br/><h3>WiFi</h3><hr>";
 const char HTTP_INFO_uptime[]     PROGMEM = "<dt>运行时间</dt><dd>{1} 分钟 {2} 秒</dd>";
 const char HTTP_INFO_chipid[]     PROGMEM = "<dt>芯片ID</dt><dd>{1}</dd>";
-const char HTTP_INFO_idesize[]    PROGMEM = "<dt>闪存大小</dt><dd>{1} bytes</dd>";
+const char HTTP_INFO_idesize[]    PROGMEM = "<dt>闪存大小</dt><dd>{1}</dd>";
 const char HTTP_INFO_sdkver[]     PROGMEM = "<dt>SDK版本</dt><dd>{1}</dd>";
 const char HTTP_INFO_cpufreq[]    PROGMEM = "<dt>CPU频率</dt><dd>{1}MHz</dd>";
 const char HTTP_INFO_apip[]       PROGMEM = "<dt>热点IP地址</dt><dd>{1}</dd>";
