@@ -574,8 +574,8 @@ class WiFiManager
     int           _cpclosedelay           = 2000; // delay before wifisave, prevents captive portal from closing to fast.
     bool          _cleanConnect           = false; // disconnect before connect in connectwifi, increases stability on connects
     bool          _connectonsave          = true; // connect to wifi when saving creds
-    bool          _disableSTA             = false; // disable sta when starting ap, always
-    bool          _disableSTAConn         = true;  // disable sta when starting ap, if sta is not connected ( stability )
+    bool          _disableSTA             = false; // 启动ap时禁用sta，始终
+    bool          _disableSTAConn         = false;  // 如果sta未连接（稳定性），启动ap时禁用sta  原默认 true
     bool          _channelSync            = false; // use same wifi sta channel when starting ap
     int32_t       _apChannel              = 0; // default channel to use for ap, 0 for auto
     bool          _apHidden               = false; // store softap hidden value
@@ -794,10 +794,10 @@ protected:
     boolean       configPortalActive  = false;
 
 
-    // these are state flags for portal mode, we are either in webportal mode(STA) or configportal mode(AP)
-    // these are mutually exclusive as STA+AP mode is not supported due to channel restrictions and stability
-    // if we decide to support this, these checks will need to be replaced with something client aware to check if client origin is ap or web
-    // These state checks are critical and used for internal function checks
+    // 这些是门户模式的状态标志，我们要么处于门户模式（STA），要么处于配置门户模式（AP）
+    // 这些是互斥的，因为由于信道限制和稳定性，STA+AP模式不受支持
+    // 如果我们决定支持这一点，这些检查将需要被客户端感知的东西所取代，以检查客户端来源是ap还是web
+    // 这些状态检查至关重要，用于内部功能检查
     boolean       webPortalActive     = false;
     boolean       portalTimeoutResult = false;
 

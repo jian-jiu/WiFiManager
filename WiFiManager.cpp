@@ -716,9 +716,9 @@ boolean  WiFiManager::startConfigPortal(char const *apName, char const *apPasswo
 
   if(!validApPassword()) return false;
   
-  // HANDLE issues with STA connections, shutdown sta if not connected, or else this will hang channel scanning and softap will not respond
+  // 处理STA连接问题，如果未连接，则关闭STA，否则这将挂起信道扫描，软标将不会响应
   if(_disableSTA || (!WiFi.isConnected() && _disableSTAConn)){
-    // this fixes most ap problems, however, simply doing mode(WIFI_AP) does not work if sta connection is hanging, must `wifi_station_disconnect` 
+    // 这修复了大多数ap问题，但是，如果sta连接挂起，简单地执行模式（WIFI_ap）是不起作用的，必须`WIFI_station_disconnect`
     #ifdef WM_DISCONWORKAROUND
       WiFi.mode(WIFI_AP_STA);
     #endif
