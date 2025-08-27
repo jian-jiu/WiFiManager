@@ -155,7 +155,7 @@
 #include "wm_strings_en.h"
 
 #endif
-#include WM_STRINGS_FILE
+// #include WM_STRINGS_FILE
 
 // prep string concat vars
 #define WM_STRING2(x) #x
