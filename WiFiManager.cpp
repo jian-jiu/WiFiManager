@@ -2072,7 +2072,7 @@ void WiFiManager::handleInfo() {
   }
   page += F("</dl>");
 
-  page += F("<h3>About</h3><hr><dl>");
+  page += F("<h3>关于</h3><hr><dl>");
   page += getInfoData("aboutver");
   page += getInfoData("aboutarduinover");
   page += getInfoData("aboutidfver");
