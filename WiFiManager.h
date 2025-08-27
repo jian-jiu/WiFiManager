@@ -569,17 +569,17 @@ class WiFiManager
     unsigned long _connectTimeout         = 0; // ms stop trying to connect to ap if set
     unsigned long _saveTimeout            = 0; // ms stop trying to connect to ap on saves, in case bugs in esp waitforconnectresult
     
-    WiFiMode_t    _usermode               = WIFI_STA; // Default user mode
-    String        _wifissidprefix         = FPSTR(S_ssidpre); // auto apname prefix prefix+chipid
-    int           _cpclosedelay           = 2000; // delay before wifisave, prevents captive portal from closing to fast.
-    bool          _cleanConnect           = false; // disconnect before connect in connectwifi, increases stability on connects
+    WiFiMode_t    _usermode               = WIFI_STA; // 默认用户模式
+    String        _wifissidprefix         = FPSTR(S_ssidpre); // 自动apname前缀+芯片ID
+    int           _cpclosedelay           = 2000; // wifisave之前的延迟，防止专属门户关闭过快。
+    bool          _cleanConnect           = false; // 在连接wifi之前先断开连接，提高连接的稳定性
     bool          _connectonsave          = true; // connect to wifi when saving creds
     bool          _disableSTA             = false; // 启动ap时禁用sta，始终
-    bool          _disableSTAConn         = false;  // 如果sta未连接（稳定性），启动ap时禁用sta  原默认 true
-    bool          _channelSync            = false; // use same wifi sta channel when starting ap
-    int32_t       _apChannel              = 0; // default channel to use for ap, 0 for auto
+    bool          _disableSTAConn         = true;  // 如果sta未连接（稳定性），启动ap时禁用sta
+    bool          _channelSync            = false; // 启动ap时使用相同的wifi sta频道
+    int32_t       _apChannel              = 0; // ap使用的默认通道，0用于自动
     bool          _apHidden               = false; // store softap hidden value
-    uint16_t      _httpPort               = 80; // port for webserver
+    uint16_t      _httpPort               = 80; // Web服务器端口
     // uint8_t       _retryCount             = 0; // counter for retries, probably not needed if synchronous
     uint8_t       _connectRetries         = 1; // number of sta connect retries, force reconnect, wait loop (connectimeout) does not always work and first disconnect bails
     bool          _aggresiveReconn        = false; // use an agrressive reconnect strategy, WILL delay conxs
@@ -609,8 +609,8 @@ class WiFiManager
     boolean       _wifiAutoReconnect      = true;  // there is no platform getter for this, we must assume its true and make it so
     boolean       _apClientCheck          = false; // keep cp alive if ap have station
     boolean       _webClientCheck         = true;  // keep cp alive if web have client
-    boolean       _scanDispOptions        = false; // show percentage in scans not icons
-    boolean       _paramsInWifi           = true;  // show custom parameters on wifi page
+    boolean       _scanDispOptions        = false; // 在扫描中显示百分比，而不是图标
+    boolean       _paramsInWifi           = true;  // 在wifi页面上显示自定义参数
     boolean       _showInfoErase          = true;  // info page erase button
     boolean       _showInfoUpdate         = true;  // info page update button
     boolean       _showBack               = false; // show back button

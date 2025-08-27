@@ -281,7 +281,7 @@ boolean WiFiManager::autoConnect(char const *apName, char const *apPassword) {
   #endif
 
   // bool wifiIsSaved = getWiFiIsSaved();
-  bool wifiIsSaved = true; // workaround until I can check esp32 wifiisinit and has nvs
+  bool wifiIsSaved = true; // 解决方法，直到我可以检查esp32 wifiisinit并具有nv
 
   #ifdef ESP32
   setupHostname(true);
@@ -299,15 +299,15 @@ boolean WiFiManager::autoConnect(char const *apName, char const *apPassword) {
   }
   #endif
 
-  // check if wifi is saved, (has autoconnect) to speed up cp start
-  // NOT wifi init safe
+  // 检查wifi是否已保存（具有自动连接功能）以加快cp启动速度
+  // 不是wifi初始化安全
   if(wifiIsSaved){
      _startconn = millis();
     _begin();
 
-    // attempt to connect using saved settings, on fail fallback to AP config portal
+    // 尝试使用保存的设置连接，失败后回退到AP配置门户
     if(!WiFi.enableSTA(true)){
-      // handle failure mode Brownout detector etc.
+      // 处理故障模式Brownout检测器等。
       #ifdef WM_DEBUG_LEVEL
       DEBUG_WM(WM_DEBUG_ERROR,F("[FATAL] Unable to enable wifi!"));
       #endif
@@ -333,7 +333,7 @@ boolean WiFiManager::autoConnect(char const *apName, char const *apPassword) {
     }
     #endif
 
-    // if already connected, or try stored connect 
+    // 如果已连接，请尝试存储连接
     // @note @todo ESP32 has no autoconnect, so connectwifi will always be called unless user called begin etc before
     // @todo check if correct ssid == saved ssid when already connected
     bool connected = false;
@@ -362,7 +362,7 @@ boolean WiFiManager::autoConnect(char const *apName, char const *apPassword) {
           DEBUG_WM(WM_DEBUG_DEV,F("hostname: STA: "),getWiFiHostname());
         #endif
       }
-      return true; // connected success
+      return true; // 连接成功
     }
 
     #ifdef WM_DEBUG_LEVEL
@@ -375,18 +375,17 @@ boolean WiFiManager::autoConnect(char const *apName, char const *apPassword) {
     #endif
   }
 
-  // possibly skip the config portal
+  // 可能跳过配置门户
   if (!_enableConfigPortal) {
     #ifdef WM_DEBUG_LEVEL
     DEBUG_WM(WM_DEBUG_VERBOSE,F("enableConfigPortal: FALSE, skipping "));
     #endif
 
-    return false; // not connected and not cp
+    return false; // 未连接且未连接cp
   }
 
-  // not connected start configportal
-  bool res = startConfigPortal(apName, apPassword);
-  return res;
+  // 未连接启动配置门户
+  return startConfigPortal(apName, apPassword);
 }
 
 bool WiFiManager::setupHostname(bool restart){
